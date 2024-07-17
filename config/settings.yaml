@@ -1,4 +1,4 @@
-random_state: 42
+random_state: 48
 
 data:
   raw_data_path: ./data/diabetes.csv
@@ -10,8 +10,10 @@ features_info :
 scaler_model: model/scaler_model.pkl
 log_reg_model: model/log_reg_model.pkl
 
-reports : 
-  f1_score: reports/f1_score.txt
+reports :
+  EDA :
+    corr_matrix : reports/EDA/corr_matrix.png
+  f1_score : reports/f1_score.txt
 
 # To review
 logging:
