@@ -4,6 +4,7 @@ import yaml
 from sklearn.model_selection import train_test_split
 import pickle
 from sklearn.metrics import f1_score
+
 from src.data_visualization.EDA import EDA
 from src.data_treatment.data_scaling import Scaling
 from src.model.model_building import Model_building
