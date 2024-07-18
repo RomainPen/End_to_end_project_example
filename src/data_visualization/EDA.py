@@ -6,7 +6,7 @@ from pandas.api.types import is_numeric_dtype, is_object_dtype
 
 
 class EDA:
-    def __init__(self, df :pd.DataFrame, target:str):
+    def __init__(self, df: pd.DataFrame, target: str):
         """
         Initialize an Exploratory Data Analysis (EDA) object.
 
@@ -22,9 +22,7 @@ class EDA:
 
         # Sélection des colonnes catégorielles à l'exclusion de la variable CURR_HANDSET_MODE
         self.var_cat = df.select_dtypes(include=object).columns.tolist()
-         
-    
-    
+
     def correlation_matrix(self, file_saving):
         """
         Create and save a correlation matrix heatmap for selected numerical variables and the target variable.
@@ -36,11 +34,16 @@ class EDA:
             None
         """
         # Matrice de corrélation
-        correlation_matrix = self.df[[elem for elem in self.df.columns if is_numeric_dtype(self.df[elem])]].corr()
+        correlation_matrix = self.df[
+            [elem for elem in self.df.columns if is_numeric_dtype(self.df[elem])]
+        ].corr()
 
         # Sélection des variables les plus corrélées à AFTERGRACE_FLAG avec une corrélation supérieure à 0.15
         threshold = 0.05
-        target_correlations = correlation_matrix[self.target][(correlation_matrix[self.target] > threshold) | (correlation_matrix[self.target] < -threshold)]
+        target_correlations = correlation_matrix[self.target][
+            (correlation_matrix[self.target] > threshold)
+            | (correlation_matrix[self.target] < -threshold)
+        ]
 
         # Filtrage du DataFrame original pour les variables sélectionnées
         filtered_df = self.df[target_correlations.index]
@@ -50,7 +53,16 @@ class EDA:
 
         # Création de la heatmap de la matrice de corrélation filtrée
         plt.figure(figsize=(10, 8))
-        sns.heatmap(filtered_correlation_matrix, annot=True, cmap='coolwarm', center=0, fmt=".2f", annot_kws={"ha": 'center'})
-        plt.title(f"Matrice de corrélation avec variables corrélées à {self.target} (corrélation > 0.15)")
-        plt.savefig(file_saving, format='png')
+        sns.heatmap(
+            filtered_correlation_matrix,
+            annot=True,
+            cmap="coolwarm",
+            center=0,
+            fmt=".2f",
+            annot_kws={"ha": "center"},
+        )
+        plt.title(
+            f"Matrice de corrélation avec variables corrélées à {self.target} (corrélation > 0.15)"
+        )
+        plt.savefig(file_saving, format="png")
         plt.close()
