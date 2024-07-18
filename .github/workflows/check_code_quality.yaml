@@ -10,7 +10,7 @@ on:
 
 # Your workflows jobs.
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
