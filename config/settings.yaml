@@ -1,0 +1,22 @@
+random_state: 48
+
+data:
+  raw_data_path: ./data/diabetes.csv
+
+features_info :
+  target : "Outcome"
+  columns_to_drop: []
+
+scaler_model: model/scaler_model.pkl
+log_reg_model: model/log_reg_model.pkl
+
+reports :
+  EDA :
+    corr_matrix : reports/EDA/corr_matrix.png
+  f1_score : reports/f1_score.txt
+
+# To review
+logging:
+  training_logs: logs/training_logs.txt
+  API_logs: logs/API_logs.txt
+  log_level: INFO
