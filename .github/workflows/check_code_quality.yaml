@@ -4,9 +4,9 @@ name: Deploy to heroku.
 # Run workflow on every push to main branch.
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
-    branches: [main]
+    branches: [main, develop]
 
 # Your workflows jobs.
 jobs:
