@@ -70,3 +70,4 @@ def prediction(
 if __name__ == "__main__":
     # Run API :
     uvicorn.run(api)
+
