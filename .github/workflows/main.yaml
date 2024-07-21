@@ -17,6 +17,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      # Checking the code structure (PEP8)
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install Black
+        run: pip install black
+
+      - name: Run Black
+        run: black --check --verbose .
+
+
 
 ### ⬇ IMPORTANT PART ⬇ ###
 
