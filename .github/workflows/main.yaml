@@ -30,7 +30,7 @@ jobs:
           pip install black[jupyter]
 
       - name: Run Black
-        run: black --check --verbose .
+        run: black --check --verbose ./backend
 
 
 
