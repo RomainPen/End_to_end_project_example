@@ -15,7 +15,7 @@ with open("config/settings.yaml", "r") as settings_file:
 
 # Instanciate application :
 api = FastAPI()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="../frontend/templates")
 
 
 # Load models :
