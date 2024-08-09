@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction du diabète</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div id="mainPage">
+        <h1>Prédiction de la progression du diabète</h1>
+        <form action="/print" method="post">
+            <input type="text" name="first_name" id="first_name" placeholder="Entrez votre prénom" required>
+            <input type="text" name="last_name" id="last_name" placeholder="Entrez votre nom" required>
+            <button type="submit">Imprimer le nom</button>
+        </form>
+
+        <form action="/print_age" method="post">
+            <input type="text" name="age" id="age" placeholder="Entrez votre âge" required>
+            <button type="submit">Imprimer l'âge</button>
+        </form>
+
+        {% if print_name %}
+        <div class="result">
+            <h2>Nom imprimé :</h2>
+            <p>{{ print_name }}</p>
+        </div>
+        {% endif %}
+
+        {% if print_age %}
+        <div class="result">
+            <h2>Âge imprimé :</h2>
+            <p>{{ print_age }}</p>
+        </div>
+        {% endif %}
+
+        <button onclick="window.location.href='/new_page'">Changer de page</button>
+    </div>
+
+
+    <div class="jumping-monkey">
+        <img src="../image/chat_happy.jpeg" alt="Singe sautant">
+    </div>
+
+    <script src='./js/script.js'></script>
+
+</body>
+</html>
