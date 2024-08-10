@@ -13,9 +13,18 @@ h1 {
     animation: fadeIn 1.5s;
 }
 
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
 form, .content {
     background-color: white;
-    padding: 20px;
+    padding: 20px 20px 20px 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     margin-bottom: 20px;
@@ -23,7 +32,15 @@ form, .content {
 }
 
 input[type="text"] {
-    width: 100%;
+    width: 96%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="number"] {
+    width: 96%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -45,11 +62,12 @@ button:hover {
 }
 
 .result {
-    background-color: #ecf0f1;
+    background-color: rgba(31, 60, 90, 0.5);
     padding: 15px;
     border-radius: 8px;
     margin-top: 20px;
     animation: fadeIn 1s;
+
 }
 
 @keyframes fadeIn {
@@ -68,7 +86,7 @@ button:hover {
     position: fixed;
     bottom: 20px;
     animation: 
-        run 10s linear infinite,
+        run 5s linear infinite,
         jump 0.2s ease-in-out infinite alternate;
 }
 
@@ -132,7 +150,6 @@ footer {
     position: fixed;
     bottom: 10px;
     right: 10px;
-    background-color: #34495e;
     color: white;
     padding: 10px;
     border-radius: 5px;
@@ -147,4 +164,5 @@ footer {
 main {
     flex: 1;
     padding-bottom: 60px; /* Espace pour le footer */
+    background-color: #ffffff;
 }

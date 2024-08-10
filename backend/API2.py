@@ -31,16 +31,17 @@ def new_page(request: Request):
     return templates.TemplateResponse("new_page.html", {"request": request})
 
 
-@app.post('/print')
-def print_name(request: Request, first_name= Form(...), last_name= Form(...)):
+@app.post('/print_sum')
+def print_name(request: Request, first_nb= Form(...), second_nb= Form(...)):
+    total_sum = int(first_nb) + int(second_nb)
     return templates.TemplateResponse(
-        "home2.html", {"request": request, "print_name": f"you are {first_name} {last_name}"}
+        "home2.html", {"request": request, "print_sum": f"sum = {total_sum}"}
     )
 
-@app.post('/print_age')
-def print_name(request: Request, age=Form(...)):
+@app.post('/print_name')
+def print_name(request: Request, name=Form(...)):
     return templates.TemplateResponse(
-        "home2.html", {"request": request, "print_age": f"you are {age}"}
+        "home2.html", {"request": request, "print_name": f"you are {name}"}
     )
 
 

@@ -3,30 +3,30 @@
 {% block title %}Accueil - Prédiction du diabète{% endblock %}
 
 {% block content %}
-<div id="mainPage">
+<div class="container">
     <h1>Prédiction de la progression du diabète</h1>
-    <form action="/print" method="post">
-        <input type="text" name="first_name" id="first_name" placeholder="Entrez votre prénom" required>
-        <input type="text" name="last_name" id="last_name" placeholder="Entrez votre nom" required>
-        <button type="submit">Imprimer le nom</button>
+    <form action="/print_sum" method="post">
+        <input type="number" name="first_nb" placeholder="first nb" required>
+        <input type="number" name="second_nb" placeholder="second nb" required>
+        <button type="submit">Imprimer la sum</button>
     </form>
 
-    <form action="/print_age" method="post">
-        <input type="text" name="age" id="age" placeholder="Entrez votre âge" required>
-        <button type="submit">Imprimer l'âge</button>
+    <form action="/print_name" method="post">
+        <input type="text" name="name" placeholder="Entrez votre name" required>
+        <button type="submit">Imprimer name</button>
     </form>
 
-    {% if print_name %}
+    {% if print_sum %}
     <div class="result">
-        <h2>Nom imprimé :</h2>
-        <p>{{ print_name }}</p>
+        <h2>total sum :</h2>
+        <p>{{ print_sum }}</p>
     </div>
     {% endif %}
 
-    {% if print_age %}
+    {% if print_name %}
     <div class="result">
-        <h2>Âge imprimé :</h2>
-        <p>{{ print_age }}</p>
+        <h2> Your name is :</h2>
+        <p>{{ print_name }}</p>
     </div>
     {% endif %}
 
