@@ -30,12 +30,12 @@ def read_root(request: Request):
 def new_page(request: Request):
     return templates.TemplateResponse("new_page.html", {"request": request})
 
+
 @app.post('/print')
 def print_name(request: Request, first_name= Form(...), last_name= Form(...)):
     return templates.TemplateResponse(
         "home2.html", {"request": request, "print_name": f"you are {first_name} {last_name}"}
     )
-
 
 @app.post('/print_age')
 def print_name(request: Request, age=Form(...)):

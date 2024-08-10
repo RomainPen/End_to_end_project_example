@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouvelle Page</title>
-    <link rel="stylesheet" href="./css/styles.css">
-</head>
-<body>
-    <div class="content">
-        <h1>Nouvelle Page</h1>
-        <p>Bienvenue sur la nouvelle page !</p>
-        <p>Ici, vous pouvez ajouter du contenu supplémentaire ou d'autres fonctionnalités.</p>
-        <button onclick="window.location.href='/'">Retour à la page principale</button>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Nouvelle Page - Prédiction du diabète{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>Nouvelle Page</h1>
+    <p>Bienvenue sur la nouvelle page !</p>
+    <p>Ici, vous pouvez ajouter du contenu supplémentaire ou d'autres fonctionnalités.</p>
+    <button onclick="window.location.href='/'">Retour à la page principale</button>
+</div>
+{% endblock %}
