@@ -9,7 +9,6 @@ import pickle
 import yaml
 
 
-
 # Load project setting from setting.yaml :
 with open("config/settings.yaml", "r") as settings_file:
     settings = yaml.safe_load(settings_file)
@@ -17,9 +16,6 @@ with open("config/settings.yaml", "r") as settings_file:
 # Load models :
 log_reg_model = pickle.load(open(settings["log_reg_model"], "rb"))
 scaler_model = pickle.load(open(settings["scaler_model"], "rb"))
-
-
-
 
 
 # Instanciate fastAPI :
@@ -31,17 +27,17 @@ templates = Jinja2Templates(directory="../frontend/templates")
 
 
 # get :
-@api.get('/')
+@api.get("/")
 def read_root(request: Request):
     return templates.TemplateResponse("home.html", {"request": request})
 
-@api.get('/new_page')
+
+@api.get("/new_page")
 def new_page(request: Request):
     return templates.TemplateResponse("new_page.html", {"request": request})
 
 
-
-# post : 
+# post :
 # Le système recup l'info entrée par l'utilisateur et fait un retour :
 @api.post("/predict")
 def prediction(
@@ -77,12 +73,13 @@ def prediction(
     pred_proba = log_reg_model.predict_proba(data)[0][1]
 
     return templates.TemplateResponse(
-        "home.html", {"request": request, "prediction_text": f"Pred {pred:.2f}", "predict_proba": f"Pred proba {pred_proba:.2f}"}
+        "home.html",
+        {
+            "request": request,
+            "prediction_text": f"Pred {pred:.2f}",
+            "predict_proba": f"Pred proba {pred_proba:.2f}",
+        },
     )
-
-
-
-
 
 
 if __name__ == "__main__":
