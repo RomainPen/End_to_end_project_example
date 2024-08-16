@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, Form
-from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
 import uvicorn
 import numpy as np
 import pandas as pd
@@ -8,27 +9,39 @@ import pickle
 import yaml
 
 
+
 # Load project setting from setting.yaml :
 with open("config/settings.yaml", "r") as settings_file:
     settings = yaml.safe_load(settings_file)
-
-
-# Instanciate application :
-api = FastAPI()
-templates = Jinja2Templates(directory="../frontend/templates")
-
 
 # Load models :
 log_reg_model = pickle.load(open(settings["log_reg_model"], "rb"))
 scaler_model = pickle.load(open(settings["scaler_model"], "rb"))
 
 
-# l'utilisateur recoit une info de la part du système (Page d'acceuil) :
-@api.get("/", response_class=HTMLResponse)
+
+
+
+# Instanciate fastAPI :
+api = FastAPI()
+api.mount("/image", StaticFiles(directory="../frontend/image"), name="image")
+api.mount("/css", StaticFiles(directory="../frontend/templates/css"), name="css")
+api.mount("/js", StaticFiles(directory="../frontend/templates/js"), name="js")
+templates = Jinja2Templates(directory="../frontend/templates")
+
+
+# get :
+@api.get('/')
 def read_root(request: Request):
     return templates.TemplateResponse("home.html", {"request": request})
 
+@api.get('/new_page')
+def new_page(request: Request):
+    return templates.TemplateResponse("new_page.html", {"request": request})
 
+
+
+# post : 
 # Le système recup l'info entrée par l'utilisateur et fait un retour :
 @api.post("/predict")
 def prediction(
@@ -61,10 +74,15 @@ def prediction(
 
     # 3/ Pred dataframe
     pred = log_reg_model.predict(data)[0]
+    pred_proba = log_reg_model.predict_proba(data)[0][1]
 
     return templates.TemplateResponse(
-        "home.html", {"request": request, "prediction_text": f"Pred {pred:.2f}"}
+        "home.html", {"request": request, "prediction_text": f"Pred {pred:.2f}", "predict_proba": f"Pred proba {pred_proba:.2f}"}
     )
+
+
+
+
 
 
 if __name__ == "__main__":

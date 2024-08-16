@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil - Prédiction du diabète{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Diabetes Progression Prediction</h1>
+        <form action="/predict" method="post">
+            <input type="number" name="Pregnancies" placeholder="Number of Pregnancies" required>
+            <input type="number" name="Glucose" placeholder="Glucose Level" required>
+            <input type="number" name="BloodPressure" placeholder="Blood Pressure" required>
+            <input type="number" name="SkinThickness" placeholder="Skin Thickness" required>
+            <input type="number" name="Insulin" placeholder="Insulin Level" required>
+            <input type="number" name="BMI" placeholder="BMI" step="0.1" required>
+            <input type="number" name="DiabetesPedigreeFunction" placeholder="Diabetes Pedigree Function" step="0.001" required>
+            <input type="number" name="Age" placeholder="Age" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text and predict_proba %}
+        <div class="result">
+            <h2>Prediction Result:</h2>
+            <p>{{ prediction_text }}</p>
+            <p>{{ predict_proba }}</p>
+        </div>
+        {% endif %}
+
+    <button onclick="window.location.href='/new_page'">Changer de page</button>
+</div>
+
+<div class="jumping-monkey">
+    <img src="../image/chat_happy.jpeg" alt="Singe sautant">
+</div>
+{% endblock %}
