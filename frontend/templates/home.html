@@ -1,62 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diabetes Progression Prediction</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        form {
-            display: grid;
-            gap: 10px;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e7f3fe;
-            border-left: 6px solid #2196F3;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Diabetes Progression Prediction</h1>
+{% extends "base.html" %}
+
+{% block title %}Accueil - Prédiction du diabète{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Diabetes Progression Prediction</h1>
         <form action="/predict" method="post">
             <input type="number" name="Pregnancies" placeholder="Number of Pregnancies" required>
             <input type="number" name="Glucose" placeholder="Glucose Level" required>
@@ -69,12 +17,18 @@
             <button type="submit">Predict</button>
         </form>
 
-        {% if prediction_text %}
+        {% if prediction_text and predict_proba %}
         <div class="result">
             <h2>Prediction Result:</h2>
             <p>{{ prediction_text }}</p>
+            <p>{{ predict_proba }}</p>
         </div>
         {% endif %}
-    </div>
-</body>
-</html>
+
+    <button onclick="window.location.href='/new_page'">Changer de page</button>
+</div>
+
+<div class="jumping-monkey">
+    <img src="../image/chat_happy.jpeg" alt="Singe sautant">
+</div>
+{% endblock %}
