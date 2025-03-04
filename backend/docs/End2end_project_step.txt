@@ -1,6 +1,6 @@
 Warning : Follow also the Git instruction first (in Notion Benj Dubreu)
 
-[  ] 0/ Create and Init Git account (If new computer)
+[  ] 0/ Create and Init Git account (If new computer) (follow tuto_git_company2)
 
 [  ] 1/ create the git repo in GitHub
 [  ] 2/ import repo (git clone)
