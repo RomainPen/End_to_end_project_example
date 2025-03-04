@@ -1,0 +1,23 @@
+- Pyenv
+    - 1/ Ouvrir Ubuntu
+    - 2/ install Pyenv :  “ curl [https://pyenv.run](https://pyenv.run/) | bash “
+    - 3/ Ouvrir le fichier .zshrc : “ vim ~/.zshrc “
+    - 3*/ Insérer le PATH dans .zshrc :
+        
+        ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/23016916-5a89-44a1-a0d4-ce81a2fa3f1b/23d75fd0-d1bb-4fca-813c-0adc86d1a693/image.png)
+        
+        export PYENV_ROOT="$HOME/.pyenv"
+        [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init - zsh)"
+        
+        ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/23016916-5a89-44a1-a0d4-ce81a2fa3f1b/69095a4d-fd50-4219-b972-4c38b9e0d76b/image.png)
+        
+    - 3**/ Puis on sort du mode insertion avec Echap et on appuie sur :wq
+    - 4/ Reste plus qu'à recharger le terminal pour prendre en compte la nouvelle configuration de Pyenv et du PATH: exec "$SHELL”
+    - 5/ installer les dépendances pour Pyenv (faire A, puis B) :
+        - A/ sudo apt update; sudo apt install build-essential libssl-dev zlib1g-dev \
+        libbz2-dev libreadline-dev libsqlite3-dev curl git \
+        libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev
+        - B/ sudo apt install liblzma-dev
+    - 6/ Testez si Pyenv est bien installé : “ pyenv --version “
+    - 6*/ Si c’est good, ça renvoi la version de Pyenv

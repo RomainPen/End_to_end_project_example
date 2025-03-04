@@ -1,0 +1,195 @@
+################################ Pipeline Reg/Classif: #####################################
+
+- Business context :
+Define PB 
+Objective 
+What will be the input ?
+What will be the output ?
+
+- Activate GPU with Nvidia package (option) :
+
+- Import packages :
+
+- Collect and build data :
+import data
+build key for merging (if necessary)
+merge data (left join, right join, ...etc)
+Transform .csv file to .parquet (size optimization) or .pickle (speed optimisation) file
+
+- Split df into train/val (df_train/df_val) if modeling with CV_method:
+- OR Split df into train/val1/val2 (df_train/df_val1/df_val2) if modeling with train_val1_val2_method:
+split
+reset_index
+Pour chaque variable X, verifier si la distribution est à peu près la même entre "df_train et df_val" ou entre "df_train et df_val1 et df_val2". (Si oui, alors next. Sinon, on refait le split en changeant le random_state).
+save df_val1_brut or df_val2_brut as a file (parquet, csv, or pickle) in the "../Data/deployement_testing_data/df_val_brut.csv" path for the deployment testing.
+
+
+!!!!!!!!!!!!!!!!!!!! WARNING : df_val != df_test |&| df_val1 != df_test |&| df_val2 != df_test !!!!!!!!!!!!!!!!!!!!
+
+- Data cleaning 1 (apply on <df_train/df_val> or on <df_train/df_val1/df_val2>) : 
+Check/rename col names (only in kaggle challenge case : df_train/val and df_test)
+Check type of col (Categorical col : transform "object" type to "categorical" / Num col : downcasting value / Bool col : Casting True/False) https://www.youtube.com/watch?v=u4_c2LDi4b8&ab_channel=RobMulla
+Basic treatment and normalization (only in kaggle challenge case : df_train/val and df_test) 
+For CAT col, check if the all unique values (except NaN) of df_test are in df_train. (if not, 2 sol : 1/delete the row of df_test and signal it, 2/delete the col in df_train and df_test)
+
+- Data cleaning 2 (apply on <df_train/df_val> or on <df_train/df_val1/df_val2>) : 
+Data filter (select important rows, if necessary)
+Data transformation (voir comment gérer les cas où les liste n'ont pas les mêmes longueurs)
+Check unusual/incoherent values
+Handle NaN (Drop col with high NaN | Fillna by fix value | Display Fillna by non-fix value) (TRY Fillna with KNN imputer for non-fix value)
+
+- [Option] Create target :
+
+- [Option] Create small df (Create a new df that it is smaller and similar as the real df) (option, Big data): 
+
+- Exploration data analysis on df_train set (EDA) :
+Quant-quant
+Cat-Cat
+Quant-Cat
+
+- Feature engineering :
+Create col
+Feature selection (+ RFE (option))
+Row selection (ex : only in df_train, delete row if it contain more than 80% of NaN)
+Create x and y
+
+- Modeling :
+WARNING : before each training/prediction, transform the df dataset to numpy (df_train.to_numpy() and df_val.to_numpy()) !!!
+WARNING 2 (proposition, but not sure) : try the same with list instead numpy.
+Display Data treatment methods before modelling :
+-> Analyze Fillna non-fix method 
+-> Analyze Encoding/Scaling method
+Model testing (CV) :
+-> Creation of a CV metric
+-> For each model 
+    Naiv modelling
+    Bayesion opt 
+    Train with best hyperparameters
+    Save the model
+Model testing (train/val1/val2) :
+-> Split df_val to df_val1/df_val2 
+-> Fillna 
+-> Encoding/scaling
+-> For each model
+    Naiv modelling
+    Bayesion opt 
+    Train with best hyperparameters
+    Save the model
+Combinaison testing (CV or train/val1/val2) :
+-> Split df_val to df_val1/df_val2 (already done)
+-> Fillna 
+-> Encoding/scaling
+-> Import all models
+-> Create the combinaison method 
+-> For each model
+    Naiv modelling
+    Bayesion opt (Find the best combinaison)
+    Create dict_coeff with best hyperparameters
+    Save the best combinaison (dict_coeff + models of this combinaison)
+ 
+
+- Choose, Treat, Valid, Save (CTVS) :
+Choose the best model :
+    Give the name of the Best model
+Treat the data for the best model (x_train/x_val or x_train/x_val1/x_val2) :
+    Fillna Num/Cat col
+    Encoding Cat col and Scaling Num col (option)
+    Save the encoding/scaling parameters as .pkl (encoding_scaling.pkl in model folder) [pickle.dump(scaler, open('encoding_scaling.pkl','wb'))] (T include in the pre-processing package)
+Load the best model :
+    Load best model 
+Validation :
+    score (train, val1, val2)
+Save model in the folder "Best_model" :
+    Save as .pkl format    
+
+- Analyse output :
+Confusion matrix
+Lift curve
+Roc-AUC
+Learning curve
+
+- Choose best threshold (option) :
+make scorer
+
+- Feature impact analysis (model interpretation) :
+Identify the most important variables
+Shap value (summary_plot, PDP)
+
+
+
+- Deployment :
+WARNING : for checking if the pipeline is good, apply this function pipeline (deployment funct) on : 
+> df_val brut (df_val before any treatment) if I modelized with CV_method, then check if the metrics score is the same with the score obtained during the CTVS part.
+> df_val2 brut (df_val2 before any treatment) if I modelized with train_val1_val2_method, then check if the metrics score is the same with the score obtained during the CTVS part.
+
+Choose type of output (general, individual)
+If general, output -> .csv
+If ind, output -> Value
+
+0/ Import 
+- Import model
+- Import the encoding/scaling model (.pkl file) 
+
+1/ Open data
+- read_csv
+- Take the ID (option)
+
+2/ Data cleaning 1
+- Check/rename col names
+- Basic treatment
+- For CAT col (which are used in "Feature creation" and/or "Fillna_nonfix"), check if the all unique values (except NaN) of df_test are in df_train. 
+  (if not, 2 outputs : then remove the row and signal it)
+
+2*/ Data cleaning 2
+- Data filter
+- Data transformation
+- Check/change col type
+- Handle abnormal values
+- Impute NaN (delete col, fillna_fix)
+
+3/ Feature eng 
+- Feature creation 
+- Feature selection (x_test = x_test[list(x_train.columns)])
+- Row selection (useless in deployment)
+
+4/ Prediction
+- Impute NaN (fillna_nonfix)
+- Encoding/Scaling (call the encoding/scaling model [.pkl])
+- best_model.predict(x_test)
+- Save the prediction (submission.csv)
+
+5/ Explain output (option)
+If general, explain output with "shap summary_plot"
+If individual, explain output with "shap force"
+
+
+
+
+
+
+
+*Strategie Project Kaggle : 
+- Dans la partie "Data Cleaning" Faire en sorte que la base train soit le plus proche possible de la base test. 
+- Lorqu'on détecte une anomalie dans la base train, verifier si c'est le cas dans la base test avant de supprimer/corriger les observations. (exemple : si on detecte une anomalie dans la base train, verifier si c'est le cas dans la base test. Si l'anomalie est seulement présente dans la base train et non dans le test, alors on peut supprimer/modifier l'observation de la base train. Si ce n'est pas le cas, alors on ne touche pas à l'observation de la base train car ce n'est finalement pas une anomalie).
+
+
+
+
+
+Interview : (14 steps)
+Business context
+Collect data
+SPlit data
+Data cleaning 1
+Data cleaning 2
+EDA
+Feature engineering
+Modelling with best hyper param
+Combine models
+Valid and save model
+Analyse output 
+Best threshold
+Analyse Features impact 
+Deployment simulation
+
+

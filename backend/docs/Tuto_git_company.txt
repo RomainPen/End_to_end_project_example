@@ -1,0 +1,308 @@
+Git en entreprise :
+
+Quand j'arrive en entreprise :
+[  ] Générer les clés ssh (pv et pb) (avec la méthode git)
+[  ] Donner la clé ssh pb a github
+[  ] Git clone via ssh (attention : ici on récupère seulement la branch main du repo)
+[  ] Importer l'environnement virtuel (voir tuto env dans le chapitre suivant)
+
+Tous les jours :
+
+[  ] activer l’env virtuelle : nom_env/Scripts/Activate
+[  ] En local, S'assurer d'être sur la branche main/develop
+[  ] Git pull de la branch main/develop
+[  ] Git branch (Créer une new branch perso)
+[  ] Aller sur la branch creer (Git checkout)
+[  ] Faire les modifications de code + reformater le code avec le package Black
+[  ] Ajouter les modifs à l'index (Git add)
+[  ] Git commit à chaque fin de journée
+[  ] Git push de la branch perso sur le repo distant
+[  ] Creer un Pull request (from branch perso to main/develop)
+[  ] Dde au manager de regarder mon pull request ( envoyé le lien de la conv pull request par teams)
+[  ] Le manager approuve le code (click bouton sur github), Pull request accepté
+[  ] Le chef de projet ou moi faisons : le Merge pull request
+[  ] Supprimer la branch sur github et en local
+[  ] Les 2 collaborateurs font un Git pull de la branch main en local, pour être sur la même longueur d'onde
+
+A retenir (pour éviter les conflits): lorsque 2 ind travaillent sur un même projet, ils doivent tous les 2 Créer leur propre branche et ne pas modifier le même fichier en même temps.
+
+Git en entreprise avec la branche develop :
+
+[  ] Activer l’env virtuel : nom_env/Scripts/Activate
+
+[  ] En local, S'assurer d'être sur la branche main
+
+[  ] Voir la liste des branch du repo en ligne github (=remote) : git branch -a
+
+[  ] Importer la branch develop : git checkout -b develop remotes/origin/develop
+[  ] Git pull de la branch develop (dde au manager)
+[  ] Git branch nom_branche (Attention : Créer une new branch perso à partir de la branch “develop”)
+[  ] Aller sur la branch creer  : Git checkout nom_branch
+[  ] Faire les modifications de code + reformater le code avec le package Black
+[  ] Ajouter les modifs à l'index (Git add)
+[  ] Git commit à chaque fin de journée
+[  ] Git push de la branch perso sur le repo distant
+[  ] Creer un Pull request (from branch perso to develop)
+[  ] Dde au manager de regarder mon pull request ( envoyé le lien de la conv pull request par teams)
+[  ] Le manager approuve le code (click bouton sur github), Pull request accepté
+[  ] Le chef de projet ou moi faisons : le Merge pull request (branch perso to devolop)
+[  ] Supprimer la branch perso sur github et en local (attention ! ne pas supprimer la branch develop)
+[  ] Les 2 collaborateurs font un Git pull de la branch develop en local, pour être sur la même longueur d'onde
+
+Une fois le projet terminer et que tout marche sur la branch develop, on fait :
+
+[  ] Merge branch develop to main
+
+[  ] Les 2 collaborateurs font un Git pull de la branch “develop et main” en local, pour être sur la même longueur d'onde
+
+[option] Commande à savoir :
+[  ] Git branch (Créer une new branch perso)
+[  ] Git commit à chaque fin de journée
+[  ] Git push sur la branch perso
+[  ] Git pull request (from branch perso to main)
+[  ] Pull request accepté
+[  ] Les 2 collaborateurs font un Git pull de la branch main, pour être sur la même longueur d'onde
+
+See the list of branch in the remote repo (github) : git branch -a
+
+Si le fichier est déjà ajouter à l’index (càd qu’il a deja passé l’étape du git add), et qu’on veut le faire revenir en arrière, on fait : git restore - - staged nom_fichier.py
+
+
+
+
+
+
+
+
+Update Git bash version : 
+
+- from Git bash terminal : git clone https://github.com/git/git
+
+
+
+
+
+
+
+- Récup son compte Github sur le new pc avec la clé ssh
+    
+    je viens de m'acheter un nouveau pc, j'aimerai pusher des codes sur mon repo github existant, que dois-je faire ?
+    
+    Félicitations pour votre nouveau PC ! Pour pousser du code sur votre dépôt GitHub existant, suivez ces étapes générales :
+    
+    1. **Installer Git :**
+    Assurez-vous d'avoir Git installé sur votre nouveau PC. Si ce n'est pas le cas, vous pouvez le télécharger depuis [le site officiel de Git](https://git-scm.com/).
+    2. **Cloner votre dépôt existant :**
+    Utilisez la commande suivante dans votre terminal pour cloner votre dépôt GitHub sur votre nouveau PC. Remplacez **`URL_DU_REPO`** par l'URL de votre dépôt GitHub.
+        
+        ```bash
+        bashCopy code
+        git clone URL_DU_REPO
+        
+        ```
+        
+    3. **Changer de répertoire :**
+    Accédez au répertoire cloné en utilisant la commande **`cd`**.
+        
+        ```bash
+        bashCopy code
+        cd NOM_DU_REPO
+        
+        ```
+        
+    4. **Configurer Git :**
+    Configurez votre nom d'utilisateur et votre adresse e-mail si ce n'est pas déjà fait.
+        
+        ```bash
+        bashCopy code
+        git config --global user.name "VotreNom"
+        git config --global user.email "votre@email.com"
+        
+        ```
+        
+    5. **Ajouter et pousser les modifications :**
+    Faites vos modifications dans le code, puis ajoutez et commitez les changements.
+        
+        ```bash
+        bashCopy code
+        git add .
+        git commit -m "Description du changement"
+        
+        ```
+        
+    6. **Pousser vers GitHub :**
+    Enfin, poussez vos modifications sur GitHub.
+        
+        ```bash
+        bashCopy code
+        git push origin NOM_DE_VOTRE_BRANCHE
+        
+        ```
+        
+        Assurez-vous de remplacer **`NOM_DE_VOTRE_BRANCHE`** par le nom de la branche sur laquelle vous travaillez (par exemple, "main" ou "master").
+        
+    
+    Ces étapes devraient vous permettre de pousser vos modifications sur votre dépôt GitHub depuis votre nouveau PC. Assurez-vous également d'avoir les droits d'accès nécessaires pour effectuer ces opérations sur votre dépôt.
+    
+    https://lh3.googleusercontent.com/a/AEdFTp6Cy3ogcTdzlgYhhK5NVS591BgsMG9N45TSPIK9=s96-c
+    
+    **You**
+    
+    j'ai lancé : git push 
+    
+    et j'ai obtenu ce message : 
+    git@github.com: Permission denied (publickey).
+    fatal: Could not read from remote repository.
+    
+    Please make sure you have the correct access rights
+    and the repository exists.
+    
+    Le message d'erreur que vous avez reçu indique un problème d'autorisation, probablement lié à la clé SSH. Voici comment résoudre cela :
+    
+    1. **Vérifier la clé SSH :**
+    Assurez-vous que la clé SSH de votre nouveau PC est ajoutée à votre compte GitHub. Vous pouvez le faire en suivant ces étapes :
+        - Copiez votre clé SSH publique sur votre nouveau PC en utilisant la commande suivante dans le terminal :
+            
+            ```bash
+            bashCopy code
+            pbcopy < ~/.ssh/id_rsa.pub
+            
+            ```
+            
+            Si vous utilisez Windows, vous devrez peut-être rechercher votre clé SSH et copier son contenu.
+            
+        - Accédez à votre compte GitHub en ligne.
+        - Allez dans "Settings" (Paramètres) > "SSH and GPG keys" (Clés SSH et GPG).
+        - Ajoutez une nouvelle clé SSH en collant la clé que vous avez copiée.
+    2. **Vérifier l'URL du dépôt distant :**
+    Assurez-vous que l'URL du dépôt distant est configurée pour utiliser SSH. Vous pouvez vérifier cela en utilisant la commande suivante dans le répertoire local de votre dépôt :
+        
+        ```bash
+        bashCopy code
+        git remote -v
+        
+        ```
+        
+        Si l'URL commence par **`https://`**, vous pouvez changer l'URL en utilisant la commande suivante :
+        
+        ```bash
+        bashCopy code
+        git remote set-url origin git@github.com:USERNAME/NOM_DU_REPO.git
+        
+        ```
+        
+        Assurez-vous de remplacer **`USERNAME`** par votre nom d'utilisateur GitHub et **`NOM_DU_REPO`** par le nom de votre dépôt.
+        
+    3. **Vérifier les droits d'accès :**
+    Assurez-vous que votre compte GitHub a les droits d'accès appropriés pour le dépôt en question.
+    
+    Essayez à nouveau de pousser vos modifications après avoir effectué ces vérifications. Si le problème persiste, assurez-vous que votre clé SSH est correctement configurée sur votre nouveau PC.
+    
+    https://lh3.googleusercontent.com/a/AEdFTp6Cy3ogcTdzlgYhhK5NVS591BgsMG9N45TSPIK9=s96-c
+    
+    **You**
+    
+    J'ai lancé le code bash de la 1ere étape, j'obtien ce message : 
+    bash: /c/Users/romai/.ssh/id_rsa.pub: No such file or directory
+    
+    ChatGPT
+    
+    **ChatGPT**
+    
+    Le message d'erreur "No such file or directory" indique que le fichier **`id_rsa.pub`** (la clé publique SSH) n'a pas été trouvé à l'emplacement spécifié. Voici quelques étapes pour résoudre ce problème :
+    
+    1. **Vérifier l'existence du dossier `.ssh` :**
+    Assurez-vous que le dossier **`.ssh`** existe dans le répertoire personnel de votre utilisateur. Dans le terminal, vous pouvez vérifier cela avec la commande suivante :
+        
+        ```bash
+        bashCopy code
+        ls -al ~/.ssh
+        
+        ```
+        
+        Si le dossier n'existe pas, vous pouvez le créer avec la commande suivante :
+        
+        ```bash
+        bashCopy code
+        mkdir ~/.ssh
+        
+        ```
+        
+    2. **Générer une nouvelle paire de clés SSH :**
+    Si le dossier **`.ssh`** existe mais le fichier **`id_rsa.pub`** est manquant, vous pouvez générer une nouvelle paire de clés SSH avec la commande suivante :
+        
+        ```bash
+        bashCopy code
+        ssh-keygen -t rsa -b 4096 -C "votre@email.com"
+        
+        ```
+        
+        Assurez-vous de remplacer "votre@email.com" par l'adresse e-mail associée à votre compte GitHub. Lorsque vous êtes invité à "Enter a file in which to save the key", appuyez sur Enter pour utiliser le chemin par défaut (**`/c/Users/romai/.ssh/id_rsa`**).
+        
+    3. **Copier la nouvelle clé publique sur GitHub :**
+    Après avoir généré une nouvelle paire de clés, copiez la nouvelle clé publique dans le presse-papiers avec la commande suivante :
+        
+        ```bash
+        bashCopy code
+        cat ~/.ssh/id_rsa.pub | clip
+        
+        ```
+        
+        Si vous n'utilisez pas le terminal Git Bash, vous devrez peut-être ajuster la commande en conséquence.
+        
+        Ensuite, ajoutez la clé copiée à votre compte GitHub comme expliqué précédemment.
+        
+    
+    Après avoir effectué ces étapes, essayez à nouveau de pousser vos modifications vers GitHub. Assurez-vous également que l'URL du dépôt distant est configurée correctement pour utiliser SSH.
+
+
+
+
+
+
+
+
+
+
+- Branches git : Gestion de conflits (Quand 2 personnes modifient le même fichier)
+    
+    Gestion de conflit avec github : 
+    
+    - Tout est indiqué sur github
+    
+    Gestion de conflit avec git rebase (en local) :
+    
+    - 1/ à ce moment là, la collegue a deja tout pushé et mergé sur la branch main (puis elle se casse). Tout est bon pour elle. Il n’y a que moi qui n’ai pas pushé/mergé.
+    - 2/ Je fais le add, commit. Puis, Je push ma branche perso sur le repo github.
+    - 3/ je créer une pull request (PR) (branch perso to main),  et on voit qu’il y a un conflit (il faut donc régler ça avant).
+    - 4/ à partir de ce moment là, on va sur la branch main en local : git checkout main
+    - 4*/ on importe le codes le plus récent : git pull
+    - 5/ puis on revient sur notre branch perso : git checkout branch_perso
+    - 6/ on fait un rebase sur la branch_main à partir de la branch_perso (pour remettre les commit de la branch main au debut et mettre à la suite le commit de la creation de la branch) : “git rebase main”
+    - 7/ on résoud le conflit : en modifiant le fichier concerné par le conflit + reformater le code avec le package Black
+    - 8/ on ajoute à l’index : git add script_conflit.py
+    - 9/ git rebase - -continue
+        - 9*/ Il y aura un script ouvert par VIM, on fait : échap, puis “:wq”
+        - 9*/ ou un script ouvert par NANO, on fait : crlt +X
+    - 10/ Vérifié que le script fonctionne bien
+    - 11/ on push notre branch perso : git push -f
+    - 12/ Pull request + Merge : branch perso sur la main
+    - 13/ Supprimer les branch perso inutiles sur github et en local
+    - 14/ Le lendemain, les 2 collègues màj la branch main/develop en local : git pull
+    
+    Attention : si on a une branch dev, et bien on doit faire la même chose en remplaçant main par develop
+
+
+
+
+
+
+
+
+- Bonus
+    Voir les commit en propre : git log - -oneline
+    
+    Voyager dans temps à travers les commit (grâce à ça on peut revoir la gueule des fichiers au moment du commit) : git checkout “hash_du_commit”
+    
+    Revenir au commit actuel : git checkout master
+

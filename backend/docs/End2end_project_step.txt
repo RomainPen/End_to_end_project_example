@@ -1,0 +1,45 @@
+Warning : Follow also the Git instruction first (in Notion Benj Dubreu)
+
+[  ] 0/ Create and Init Git account (If new computer)
+
+[  ] 1/ create the git repo in GitHub
+[  ] 2/ import repo (git clone)
+[  ] 3/ create virtual env
+[  ] 3*/ create .gitignore (put venv in this file)
+[  ] 3*/ create Structure folder (See End_to_end_project on GitHub)
+[  ] 3*/ import data (data folder)
+
+Research stage :
+[  ] 3**/ model folder
+[  ] 3*/ docs folder
+[  ] 4/ notebook folder
+[  ] 4*/ create requirements.txt
+
+Branch : 
+[  ] Create branch MAIN / Develop
+[  ] 1/ git branch develop
+[  ] 2/ git checkout develop
+[  ] 3/ git push + follow instructions
+Warning : Work on and update only the develop branch 
+
+Modeling stage :
+[  ] Notebook modeling
+
+
+Deployment stage :
+[  ] 5/ deployment (have to be explored further)
+[  ] 6/ create the skeleton for deployment 
+[  ] 7/ src folder
+[  ] 7*/ training_logs folder (logs of main.py)
+[  ] 8/ config folder
+[  ] 8*/output folder (shape graph...)
+[  ] 9/ main.py (training code)
+[  ] 10/ API.py (API file)
+[  ] 11/ template folder 
+[  ] 12/ unit test folder 
+[  ] 13/ dockerfile 
+[  ] 13*/ Procfile (Heroku)
+[  ] 14/ Config project on cloud (heroku, cloud, ...) [one for develop and one for main]
+[  ] 15/ workflow folder ( ci_cd.yaml)
+[  ] 16/ set the deployment method (cloud, heroku, kubernetes, jfrog, argoCD...) [one for develop and one for main]
+[  ] 17/ pull request : develop to main

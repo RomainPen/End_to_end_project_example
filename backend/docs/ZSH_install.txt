@@ -1,0 +1,10 @@
+**Install Zsh :**
+
+- 1/ Ouvrir Ubuntu
+- 2/ Install Zsh avec la commande : “ sudo apt update && sudo apt install zsh -y “
+- 3/ Changer le shell par défaut (qui était bash) en shell Zsh : “ chsh -s $(which zsh) “
+- 4/ relancer le terminal : fermer le terminal puis réouvrir
+- 5/ Configurer Zsh : taper “ 0 “
+- 5*/ le fichier de config “ .zshrc “ va se créer automatiquement
+- 6/ Verif si on est bien sur le shell ZSH : “ echo $SHELL “
+- 6*/ Si c’est le cas, alors on a “usr/bin/zsh “

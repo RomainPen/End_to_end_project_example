@@ -1,0 +1,80 @@
+- Env virutels (Poetry + Pyenv)
+    
+    **Warning : Importer/Créer les projets à partir de Linux et non à partir de Windows**
+    
+    **Cas 1 : Créer un projet de toute pièce :**
+    
+    - 1/ Créer un dossier “dossier_projet”
+    - 2/ Ouvrir le dossier “dossier_projet” dans VScode
+    - 3/ Aller dans le terminal Ubuntu de VScode
+    - 4/ Choisir la version de python pour le projet (avec Pyenv) :
+        - 1/ Voir les versions python existantes : pyenv versions
+        - 2/ On associe la version python souhaité au projet (2 situations possibles) :
+            - A/ Si la version cherchée est déjà présente, alors :
+                - On associe la version python au projet : pyenv local 3.11.1 (exemple)
+            - B/ Sinon :
+                - On installe la version python souhaitée : pyenv install 3.12.1 (exemple)
+                - Puis, on associe la version python au projet : pyenv local 3.12.1 (exemple)
+    - 4*/ cela va créer un fichier *.python-version* dans le dossier qui contient la version.
+    - 5/ Initialiser le projet avec Poetry (création du *pyproject.toml*): **poetry init**
+    - 5*/ Pré-remplir les éléments de Poetry (attention : répondre no, no, et yes pour les yes/no questions)
+    - 6/ Définir la version de python pour Poetry  : **poetry env use $(pyenv which python)**
+    - 7/ Importer des librairies dans le projet : **poetry add nom_librairie**
+    - 7*/ le fichier poetry.lock sera mise à jour
+    - 8/ Lancer un fichier : **poetry run “nom_du_exe” “nom_du_fichier”**
+        
+        Exemple :
+        
+        - Run un fichier python : poetry run python nom_fichier.py
+        - Run FastAPI : poetry run uvicorn nom_fichier.py
+        - Run streamlit : poetry run streamlit run nom_fichier.py
+    - 8*/ Si erreur “ ModuleNotFoundError: No module named '_ctypes’ “ :
+        - 1/ On install sur Ubuntu : sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev python-tk python3-tk tk-dev libbz2-dev libsqlite3-dev
+        - 2/  Supprimer et Reinstaller les versions de python (ex : 3.11.1 et 3.12.4) via pyenv :
+            - Supprimer : pyenv uninstall 3.11.1 (ex)
+            - Reinstaller : pyenv install 3.11.1 (ex)
+        - Lien pour plus de détail :
+            - https://joshfrogers.co.uk/2024/06/11/installing-python-with-pyenv-on-ubuntu/
+            - https://itsfoss.com/build-essential-ubuntu/
+        
+    
+    **Cas 2 : Récuperé un env_virtuel existant (avec requirement.txt)**
+    
+    - 1/ Télécharger le projet
+    - 2/ Ouvrir le dossier projet avec VScode
+    - 3/ Aller dans le terminal Ubuntu de VScode
+    - 4/  Choisir la version de python pour le projet ( Attention : choisir la même version que le projet existant) : pyenv local 3.12.1 (exemple)
+    - 5/ Initialiser le projet avec Poetry (création du *pyproject.toml*): **poetry init**
+    - 6/ Définir la version de python pour Poetry  : **poetry env use $(pyenv which python)**
+    - 7/ Installer les dépendances du projet :
+        - S’il y a un fichier requirement.txt : **poetry add $(cat requirements.txt)**
+    - 8/ Importer des nouvelles librairies dans le projet : **poetry add nom_librairie**
+    - 9/ Lancer un fichier : **poetry run “nom_du_exe” “nom_du_fichier”**
+    
+    **Cas 3 : Récuperé un env_virtuel existant (avec SEULEMENT poetry.lock et pyproject.toml)** 
+    
+    - 1/ Télécharger le projet
+    - 2/ Ouvrir le dossier projet avec VScode
+    - 3/ Aller dans le terminal Ubuntu de VScode
+    - 4/  Choisir la version de python pour le projet ( Attention : choisir la même version que le projet existant) : pyenv local 3.12.1 (voir dans pyproject.toml) ****
+    - 5/ Installer les dépendances du projet : **poetry install**
+    - 6/ Définir la version de python pour Poetry  : **poetry env use $(pyenv which python)**
+    - 7/ Importer des nouvelles librairies dans le projet : **poetry add nom_librairie**
+    - 8/ Lancer un fichier : **poetry run “nom_du_exe” “nom_du_fichier”**
+    
+    **Cas 3* (2e option) : Récuperé un env_virtuel existant (avec poetry.lock, pyproject.toml, et .python_version)**
+    
+    - 1/ Télécharger le projet
+    - 2/ Ouvrir le dossier projet avec VScode
+    - 3/ Aller dans le terminal Ubuntu de VScode
+    - 4/ Installer les dépendances du projet : **poetry install**
+    - 5/ Définir la version de python pour Poetry  : **poetry env use $(pyenv which python)**
+    - 6/ Importer des nouvelles librairies dans le projet : **poetry add nom_librairie**
+    - 7/ Lancer un fichier : **poetry run “nom_du_exe” “nom_du_fichier”**
+    
+    **Cas 4 : Utiliser le même environnement pour s’entrainer en local**
+    
+    Je pense avoir enfin compris comment utiliser un pyproject.toml de façon régulière pour se simplifier la vie quand on veut juste exécuter des projets juste pour apprendre ou s'entrainer. C'est à dire que l'on ne cherche pas à créer un package valide dans le sens exportable. Par exemple si l'on veut juste exécuter  diamonds.ipynb, [mpg.py](http://mpg.py/), ... à titre d'entrainement. Cela permet de mettre une fois pour toute, tout ce que l'on a besoin a priori dans l'environnement sklearn, numpy, pandas, scipy, ....
+    
+    Ex : Dans un répertoire mpg j'ai créé un fichier mpg.ipynb ainsi qu'un environnement pyenv et poetry, en ayant fait poetry install. Maintenant je souhaite utiliser cet environnement dans un autre projet que je ne souhaite pas déployer.
+    Ex : je crée le répertoire diamonds, j'y mets mon fichier diamonds.ipynb ainsi que mon fichier pyproject.toml issu du repertoire mpg, j'y mets aussi un fichier [README.md](http://readme.md/) vide. J'ouvre mon fichier pyproject.toml, je modifie le name = "mpg" par name = "diamonds". Après il suffit de faire poetry install --no-root. Enfin, si ce fichier pyproject.toml doit être utilisé régulierement, il est possible de rajouter dans celui_ci la ligne package-mode= false ;  cela permet aussi de créer les dépendances sans packaging en faisant simplement poetry install. Evidemment la première fois que l'on ouvre le repertoire diamonds sur Vscode, il faut selectionner le noyau au nom de diamonds..... adhoc pour pouvoir exécuter diamonds.ipynb

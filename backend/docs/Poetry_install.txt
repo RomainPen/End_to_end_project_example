@@ -1,0 +1,16 @@
+- Poetry
+    - 1/ Ouvrir Ubuntu
+    - 2/ Install poetry : curl -sSL [https://install.python-poetry.org](https://install.python-poetry.org/) | python3 -
+    - 3/ Puis il faut ajouter poetry au PATH
+        - Ouvrir fichier : vim ~/.zshrc
+	- Ajouter cette ligne dans .zshrc : export PATH="$HOME/.local/bin:$PATH"
+	- Faire appliquer la modif : exec "$SHELL"
+        ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/23016916-5a89-44a1-a0d4-ce81a2fa3f1b/166bf728-9002-47fa-b9b0-faf7332fc8e8/image.png)
+        
+        ***Commande à copier :** 
+        
+        # ==== CONFIGURATION POETRY ====
+        
+        export PATH="$HOME/.local/bin:$PATH”
+        
+    - 4/ Voir si poetry est bien installé : poetry -- version

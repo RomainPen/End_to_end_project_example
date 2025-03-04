@@ -1,0 +1,78 @@
+Git en entreprise :
+
+Quand j'arrive en entreprise : 
+
+[  ] Installer git 
+
+[  ] Configurer git (git config - - global [user.name](http://user.name) “Name” et git config - - global [user.](http://user.name)email “Email”
+[  ] Générer les clés ssh (pv et pb) (avec la méthode git, voir sur leur site)
+[  ] Donner la clé ssh publique à github
+[  ] Git clone via ssh (attention : ici on récupère seulement la branch main du repo)
+[  ] Importer l'environnement virtuel (voir tuto env dans le chapitre suivant)
+
+Tous les jours :
+[  ] En local, S'assurer d'être sur la branche main et develop
+[  ] Git pull de la branch main et develop
+[  ] Git branch (Créer une new branch perso)
+[  ] Aller sur la branch creer (Git checkout)
+
+[  ] activer l’env virtuelle : nom_env/Scripts/Activate
+
+[  ] pip install -r requirements.txt (option)
+[  ] Faire les modifications de code + reformater le code avec le package Black 
+
+[  ] Màj le fichier requirements.txt
+
+[  ] deactivate env : deactivate
+[  ] Ajouter les modifs à l'index (Git add)
+[  ] Git commit à chaque fin de journée
+[  ] Git push de la branch perso sur le repo distant
+[  ] Creer un Pull request (from branch perso to main/develop)
+[  ] Dde au manager de regarder mon pull request ( envoyé le lien de la conv pull request par teams)
+[  ] Le manager approuve le code (click bouton sur github), Pull request accepté
+[  ] Le chef de projet ou moi faisons : le Merge pull request
+[  ] Supprimer la branch sur github et en local
+[  ] Les 2 collaborateurs vont sur la branch main/develop, puis font un Git pull de la branch main/develop en local, pour être sur la même longueur d'onde
+
+A retenir (pour éviter les conflits): lorsque 2 ind travaillent sur un même projet, ils doivent tous les 2 Créer leur propre branche et ne pas modifier le même fichier en même temps.
+
+Git en entreprise avec la branche develop :
+
+[  ] Activer l’env virtuel : nom_env/Scripts/Activate
+
+[  ] En local, S'assurer d'être sur la branche main
+
+[  ] Voir la liste des branch du repo en ligne github (=remote) : git branch -a
+
+[  ] Importer la branch develop : git checkout -b develop remotes/origin/develop
+[  ] Git pull de la branch develop (dde au manager)
+[  ] Git branch nom_branche (Attention : Créer une new branch perso à partir de la branch “develop”)
+[  ] Aller sur la branch creer  : Git checkout nom_branch
+[  ] Faire les modifications de code + reformater le code avec le package Black
+[  ] Ajouter les modifs à l'index (Git add)
+[  ] Git commit à chaque fin de journée
+[  ] Git push de la branch perso sur le repo distant
+[  ] Creer un Pull request (from branch perso to develop)
+[  ] Dde au manager de regarder mon pull request ( envoyé le lien de la conv pull request par teams)
+[  ] Le manager approuve le code (click bouton sur github), Pull request accepté
+[  ] Le chef de projet ou moi faisons : le Merge pull request (branch perso to devolop)
+[  ] Supprimer la branch perso sur github et en local (attention ! ne pas supprimer la branch develop)
+[  ] Les 2 collaborateurs font un Git pull de la branch develop en local, pour être sur la même longueur d'onde
+
+Une fois le projet terminer et que tout marche sur la branch develop, on fait :
+
+[  ] Merge branch develop to main
+
+[  ] Les 2 collaborateurs font un Git pull de la branch “develop et main” en local, pour être sur la même longueur d'onde
+
+[option] Commande à savoir :
+[  ] Git branch (Créer une new branch perso)
+[  ] Git commit à chaque fin de journée
+[  ] Git push sur la branch perso
+[  ] Git pull request (from branch perso to main)
+[  ] Pull request accepté
+[  ] Les 2 collaborateurs font un Git pull de la branch main, pour être sur la même longueur d'onde
+
+See the list of branch in the remote repo (github) : git branch -a
+
+Si le fichier est déjà ajouter à l’index (càd qu’il a deja passé l’étape du git add), et qu’on veut le faire revenir en arrière, on fait : git restore - - staged nom_fichier.py
