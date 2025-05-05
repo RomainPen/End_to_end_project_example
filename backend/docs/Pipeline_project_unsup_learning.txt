@@ -1,0 +1,56 @@
+################################ Pipeline Unsupervised learning: #####################################
+
+
+Business context :
+
+Collect data :
+
+Clean data : 
+-data cleaning 
+-EDA
+-feature engineering
+
+Normalized data :
+-Standard scaler
+
+Dim reduction (Option) :
+-PCA
+-FAMD
+
+Choose the model :
+- K-means or GMM or DBSCAN
+
+[------------------------ For each model ---------------------------]
+Clustering modeling :
+-find the number of cluster (elbow method)
+-modelise
+
+Validate the model (for each model) : 
+-form (silhouette score)
+-stability (comparing the output of each iteration are diff or not)
+-coherence (check if the output is consistent with the business context)
+[-------------------------------------------------------------------]
+
+Evaluate model :
+-compare form score (silhouette) between diff clustering models (hight score is good)
+
+Choose the best model :
+
+Analysed result with the context :
+-Analysed the class funded
+
+Predict cluster on new data: 
+
+
+
+
+
+
+
+
+
+Interview : (12 steps)
+
+
+
+
